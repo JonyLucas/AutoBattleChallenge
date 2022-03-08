@@ -8,6 +8,9 @@ namespace AutoBattle
     {
         public Grid Grid { get; set; }
 
+        public int numberOfPossibleTiles
+        { get { return Grid.grids.Count; } }
+
         public void AlocateCharacterLocation(Character character)
         {
             int random = 0;

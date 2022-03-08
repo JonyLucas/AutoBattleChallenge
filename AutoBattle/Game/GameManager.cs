@@ -40,7 +40,7 @@ namespace AutoBattle.Game
             _gridManager = new GridManager();
         }
 
-        public void StartGame()
+        public void StartGame(Grid grid)
         {
             //populates the character variables and targets
             var playerCharacter = _characterManager.PlayerCharacter;
@@ -48,7 +48,10 @@ namespace AutoBattle.Game
             _characterManager.SetTarget(playerCharacter, enemyCharacter);
             _characterManager.SetTarget(enemyCharacter, playerCharacter);
 
-            //AlocatePlayers();
+            _gridManager.Grid = grid;
+            _gridManager.AlocateCharacterLocation(playerCharacter);
+            _gridManager.AlocateEnemyCharacter(enemyCharacter);
+
             StartTurn();
         }
 

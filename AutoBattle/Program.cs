@@ -13,139 +13,29 @@ namespace AutoBattle
 
         private static void Main(string[] args)
         {
-            Grid grid = new Grid(5, 5);
-
-            GridBox PlayerCurrentLocation;
-            GridBox EnemyCurrentLocation;
-            Character PlayerCharacter;
-            Character EnemyCharacter;
-            List<Character> AllPlayers = new List<Character>();
-            int currentTurn = 0;
-            int numberOfPossibleTiles = grid.grids.Count;
             gameManager = GameManager.Instance;
-            Setup();
+            Grid grid = GetGridSize();
+            GetPlayerChoice();
+            GetEnemyQuantity();
 
-            void Setup()
-            {
-                GetPlayerChoice();
-                CreateEnemyCharacter();
-                StartGame();
-            }
-
-            void CreateEnemyCharacter()
-            {
-                gameManager.CharacterManager.CreateEnemyCharacter();
-            }
-
-            void StartGame()
-            {
-                PlayerCharacter = gameManager.CharacterManager.PlayerCharacter;
-                EnemyCharacter = gameManager.CharacterManager.EnemyCharacter;
-                gameManager.CharacterManager.SetTarget(PlayerCharacter, EnemyCharacter);
-                gameManager.CharacterManager.SetTarget(EnemyCharacter, PlayerCharacter);
-                //populates the character variables and targets
-                EnemyCharacter.Target = PlayerCharacter;
-                PlayerCharacter.Target = EnemyCharacter;
-                AllPlayers.Add(PlayerCharacter);
-                AllPlayers.Add(EnemyCharacter);
-                AlocatePlayers();
-                gameManager.StartTurn();
-            }
-
-            void StartTurn()
-            {
-                if (currentTurn == 0)
-                {
-                    //AllPlayers.Sort();
-                }
-
-                foreach (Character character in AllPlayers)
-                {
-                    character.StartTurn(grid);
-                }
-
-                currentTurn++;
-                HandleTurn();
-            }
-
-            void HandleTurn()
-            {
-                if (PlayerCharacter.Health == 0)
-                {
-                    return;
-                }
-                else if (EnemyCharacter.Health == 0)
-                {
-                    Console.Write(Environment.NewLine + Environment.NewLine);
-
-                    // endgame?
-
-                    Console.Write(Environment.NewLine + Environment.NewLine);
-
-                    return;
-                }
-                else
-                {
-                    Console.Write(Environment.NewLine + Environment.NewLine);
-                    Console.WriteLine("Click on any key to start the next turn...\n");
-                    Console.Write(Environment.NewLine + Environment.NewLine);
-
-                    ConsoleKeyInfo key = Console.ReadKey();
-                    StartTurn();
-                }
-            }
-
-            void AlocatePlayers()
-            {
-                //AlocatePlayerCharacter();
-            }
-
-            //void AlocatePlayerCharacter()
-            //{
-            //    int random = 0;
-            //    GridBox RandomLocation = (grid.grids.ElementAt(random));
-            //    Console.Write($"{random}\n");
-            //    if (!RandomLocation.ocupied)
-            //    {
-            //        GridBox PlayerCurrentLocation = RandomLocation;
-            //        RandomLocation.ocupied = true;
-            //        grid.grids[random] = RandomLocation;
-            //        PlayerCharacter.currentBox = grid.grids[random];
-            //        AlocateEnemyCharacter();
-            //    }
-            //    else
-            //    {
-            //        AlocatePlayerCharacter();
-            //    }
-            //}
-
-            //void AlocateEnemyCharacter()
-            //{
-            //    int random = 24;
-            //    GridBox RandomLocation = (grid.grids.ElementAt(random));
-            //    Console.Write($"{random}\n");
-            //    if (!RandomLocation.ocupied)
-            //    {
-            //        EnemyCurrentLocation = RandomLocation;
-            //        RandomLocation.ocupied = true;
-            //        grid.grids[random] = RandomLocation;
-            //        EnemyCharacter.currentBox = grid.grids[random];
-            //        grid.drawBattlefield(5, 5);
-            //    }
-            //    else
-            //    {
-            //        AlocateEnemyCharacter();
-            //    }
-            //}
+            gameManager.StartGame(grid);
         }
 
-        private static void GetGridSize()
+        private static Grid GetGridSize()
         {
-            Console.WriteLine("Choose the width of the grid:");
-            string width = Console.ReadLine();
+            int columns = 0;
+            int lines = 0;
 
-            Console.WriteLine("Choose the height of the grid:");
-            string height = Console.ReadLine();
+            while (columns <= 1 || lines <= 1)
+            {
+                Console.WriteLine("Choose the grid's number of columns:");
+                columns = Int32.Parse(Console.ReadLine());
+
+                Console.WriteLine("Choose the grid's number of lines:");
+                lines = Int32.Parse(Console.ReadLine());
+            }
+
+            return new Grid(lines, columns);
         }
 
         private static void GetPlayerChoice()
@@ -163,6 +53,20 @@ namespace AutoBattle
             else
             {
                 GetPlayerChoice();
+            }
+        }
+
+        private static void GetEnemyQuantity()
+        {
+            Console.WriteLine("Choose the number of enemies in the game:");
+            string input = Console.ReadLine();
+
+            if (Int32.TryParse(input, out int enemyQuantity) && enemyQuantity > 0 && enemyQuantity < gameManager.GridManager.numberOfPossibleTiles)
+            {
+                for (int i = 0; i < enemyQuantity; i++)
+                {
+                    gameManager.CharacterManager.CreateEnemyCharacter();
+                }
             }
         }
     }
