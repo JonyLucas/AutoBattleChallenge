@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoBattle.Enum;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using static AutoBattle.Types;
@@ -11,9 +12,20 @@ namespace AutoBattle.Characters
         private Character _enemyCharacter;
         private readonly List<Character> _allPlayers = new List<Character>();
 
+        public List<Character> AllPlayers
+        { get { return _allPlayers; } }
+
+        public Character PlayerCharacter // Temp
+        { get { return _playerCharacter; } }
+
+        public Character EnemyCharacter // Temp
+        { get { return _enemyCharacter; } }
+
         public void CreatePlayerCharacter(int classOption)
         {
-            _playerCharacter = CharacterFactory.CreateCharacter(classOption, 0);
+            CharacterClass characterClass = (CharacterClass)classOption;
+            Console.WriteLine($"Player Class Choice: {characterClass}");
+            _playerCharacter = CharacterFactory.CreateCharacter(characterClass, 0, true);
             _allPlayers.Add(_playerCharacter);
         }
 
@@ -25,7 +37,7 @@ namespace AutoBattle.Characters
             Console.WriteLine($"Enemy Class Choice: {enemyClass}");
 
             var index = _allPlayers.Count;
-            _enemyCharacter = CharacterFactory.CreateCharacter(randomInteger, index);
+            _enemyCharacter = CharacterFactory.CreateCharacter(enemyClass, index, false);
             _allPlayers.Add(_enemyCharacter);
         }
 

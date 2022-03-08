@@ -25,3 +25,17 @@ C:\Users\Joao\Downloads\AutoBattle\AutoBattle\bin\Debug\netcoreapp3.1\AutoBattle
 C:\Users\Joao\Downloads\AutoBattle\AutoBattle\bin\Debug\netcoreapp3.1\AutoBattle.dll
 C:\Users\Joao\Downloads\AutoBattle\AutoBattle\bin\Debug\netcoreapp3.1\AutoBattle.pdb
 C:\Users\Joao\Downloads\AutoBattle\AutoBattle\obj\Debug\netcoreapp3.1\AutoBattle.genruntimeconfig.cache
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\bin\Debug\netcoreapp3.1\AutoBattle.exe
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\bin\Debug\netcoreapp3.1\AutoBattle.deps.json
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\bin\Debug\netcoreapp3.1\AutoBattle.runtimeconfig.json
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\bin\Debug\netcoreapp3.1\AutoBattle.runtimeconfig.dev.json
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\bin\Debug\netcoreapp3.1\AutoBattle.dll
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\bin\Debug\netcoreapp3.1\AutoBattle.pdb
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\obj\Debug\netcoreapp3.1\AutoBattle.csproj.AssemblyReference.cache
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\obj\Debug\netcoreapp3.1\AutoBattle.GeneratedMSBuildEditorConfig.editorconfig
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\obj\Debug\netcoreapp3.1\AutoBattle.AssemblyInfoInputs.cache
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\obj\Debug\netcoreapp3.1\AutoBattle.AssemblyInfo.cs
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\obj\Debug\netcoreapp3.1\AutoBattle.csproj.CoreCompileInputs.cache
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\obj\Debug\netcoreapp3.1\AutoBattle.dll
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\obj\Debug\netcoreapp3.1\AutoBattle.pdb
+D:\Joao\Documents\Programming\Games\AutoBattleChallenge\AutoBattle\obj\Debug\netcoreapp3.1\AutoBattle.genruntimeconfig.cache

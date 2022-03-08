@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Joao\\Downloads\\AutoBattle\\AutoBattle\\AutoBattle.csproj",
+      "projectUniqueName": "D:\\Joao\\Documents\\Programming\\Games\\AutoBattleChallenge\\AutoBattle\\AutoBattle.csproj",
       "projectName": "AutoBattle",
-      "projectPath": "C:\\Users\\Joao\\Downloads\\AutoBattle\\AutoBattle\\AutoBattle.csproj",
+      "projectPath": "D:\\Joao\\Documents\\Programming\\Games\\AutoBattleChallenge\\AutoBattle\\AutoBattle.csproj",
       "packagesPath": "C:\\Users\\Joao\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Joao\\Downloads\\AutoBattle\\AutoBattle\\obj\\",
+      "outputPath": "D:\\Joao\\Documents\\Programming\\Games\\AutoBattleChallenge\\AutoBattle\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Joao\\AppData\\Roaming\\NuGet\\NuGet.Config",

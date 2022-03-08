@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using static AutoBattle.Types;
+using AutoBattle.Enum;
 
 namespace AutoBattle
 {
     public class Character
     {
+        public GridBox currentBox;
+        private bool _isPlayer;
+
         public string Name { get; set; }
         public float Health { get; set; }
         public float BaseDamage { get; set; }
         public float DamageMultiplier { get; set; }
-        public GridBox currentBox;
-        public int PlayerIndex;
+        public int PlayerIndex { get; set; }
         public Character Target { get; set; }
 
-        public Character(CharacterClass characterClass)
+        public Character(CharacterClass characterClass, bool isPlayer = false)
         {
+            _isPlayer = isPlayer;
         }
 
         public bool TakeDamage(float amount)
