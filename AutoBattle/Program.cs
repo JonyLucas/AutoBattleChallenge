@@ -49,7 +49,7 @@ namespace AutoBattle
                 AllPlayers.Add(PlayerCharacter);
                 AllPlayers.Add(EnemyCharacter);
                 AlocatePlayers();
-                StartTurn();
+                gameManager.StartTurn();
             }
 
             void StartTurn()
