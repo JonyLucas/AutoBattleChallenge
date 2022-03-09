@@ -1,8 +1,4 @@
 ﻿using AutoBattle.Enum;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using static AutoBattle.Types;
 
 namespace AutoBattle.Characters
 {

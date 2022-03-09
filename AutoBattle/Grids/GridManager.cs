@@ -14,36 +14,21 @@ namespace AutoBattle
 
         public void AlocateCharacterLocation(Character character)
         {
-            int random = 0;
-            GridBox RandomLocation = (Grid.grids.ElementAt(random));
-            Console.Write($"{random}\n");
-            if (!RandomLocation.occupied)
-            {
-                RandomLocation.occupied = true;
-                Grid.grids[random] = RandomLocation;
-                character.currentBox = Grid.grids[random];
-            }
-            else
-            {
-            }
-        }
+            bool isPositionated = false;
 
-        public void AlocateEnemyCharacter(Character character)
-        {
-            Random rand = new Random();
-            int random = rand.Next(0, NumberOfPossibleTiles);
-            GridBox RandomLocation = (Grid.grids.ElementAt(random));
-            Console.Write($"{random}\n");
-            if (!RandomLocation.occupied)
+            while (!isPositionated)
             {
-                RandomLocation.occupied = true;
-                Grid.grids[random] = RandomLocation;
-                character.currentBox = Grid.grids[random];
-                DrawBattlefield();
-            }
-            else
-            {
-                //AlocateEnemyCharacter();
+                Random rand = new Random();
+                int random = rand.Next(0, NumberOfPossibleTiles);
+                GridBox RandomLocation = (Grid.grids.ElementAt(random));
+
+                if (!RandomLocation.occupied)
+                {
+                    isPositionated = true;
+                    RandomLocation.occupied = true;
+                    Grid.grids[random] = RandomLocation;
+                    character.currentBox = Grid.grids[random];
+                }
             }
         }
 

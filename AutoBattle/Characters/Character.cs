@@ -39,6 +39,7 @@ namespace AutoBattle
                 Die();
                 return true;
             }
+            Console.WriteLine($"Player {PlayerIndex} helth: {Health}\n");
             return false;
         }
 
@@ -135,12 +136,19 @@ namespace AutoBattle
             }
         }
 
+        // Moves the character for a new position and then redraw the grid
         private void MoveDirection(Grid battlefield, int nextIndex)
         {
+            var nextBox = (battlefield.grids.Find(x => x.Index == nextIndex));
+            if (nextBox.occupied)
+            {
+                return;
+            }
+
             currentBox.occupied = false;
             battlefield.grids[currentBox.Index] = currentBox;
 
-            currentBox = (battlefield.grids.Find(x => x.Index == nextIndex));
+            currentBox = nextBox;
             currentBox.occupied = true;
             battlefield.grids[currentBox.Index] = currentBox;
 

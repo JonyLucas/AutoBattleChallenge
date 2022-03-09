@@ -14,6 +14,7 @@ namespace AutoBattle.Game
         private readonly CharacterManager _characterManager;
         private readonly GridManager _gridManager;
         private int _currentTurn = 0;
+        private bool _isGameOver = false;
 
         // Get the singleton instance
         public static GameManager Instance
@@ -49,28 +50,28 @@ namespace AutoBattle.Game
             _characterManager.SetTarget(enemyCharacter, playerCharacter);
 
             _gridManager.AlocateCharacterLocation(playerCharacter);
-            _gridManager.AlocateEnemyCharacter(enemyCharacter);
+            _gridManager.AlocateCharacterLocation(enemyCharacter);
 
             StartTurn();
         }
 
         private void StartTurn()
         {
-            if (_currentTurn == 0)
+            // Game Loop, utilizing a while instead of recursive method calls for better performance
+            while (!_isGameOver)
             {
-                // Shuffles the Characters list to randomize the first character to play
-                _characterManager.AllPlayers.Shuffle();
+                if (_currentTurn == 0)
+                {
+                    // Shuffles the Characters list to randomize the first character to play
+                    _characterManager.AllPlayers.Shuffle();
+                }
+
+                //Utilizing Linq for code simplification
+                CharacterManager.AllPlayers.ForEach(character => character.StartTurn());
+
+                _currentTurn++;
+                HandleTurn();
             }
-
-            var allPlayers = CharacterManager.AllPlayers;
-
-            foreach (Character character in allPlayers)
-            {
-                character.StartTurn();
-            }
-
-            _currentTurn++;
-            HandleTurn();
         }
 
         private void HandleTurn()
@@ -78,12 +79,14 @@ namespace AutoBattle.Game
             if (_characterManager.PlayerCharacter.Health <= 0)
             {
                 Console.WriteLine("Game Over");
+                _isGameOver = true;
             }
             else if (_characterManager.EnemyCharacter.Health <= 0)
             {
                 Console.Write(Environment.NewLine + Environment.NewLine);
 
                 Console.WriteLine("You Win");
+                _isGameOver = true;
 
                 Console.Write(Environment.NewLine + Environment.NewLine);
             }
@@ -94,7 +97,6 @@ namespace AutoBattle.Game
                 Console.Write(Environment.NewLine + Environment.NewLine);
 
                 ConsoleKeyInfo key = Console.ReadKey();
-                StartTurn();
             }
         }
     }
