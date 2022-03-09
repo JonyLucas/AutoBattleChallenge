@@ -75,11 +75,11 @@ namespace AutoBattle.Game
 
         private void HandleTurn()
         {
-            if (_characterManager.PlayerCharacter.Health == 0)
+            if (_characterManager.PlayerCharacter.Health <= 0)
             {
                 Console.WriteLine("Game Over");
             }
-            else if (_characterManager.EnemyCharacter.Health == 0)
+            else if (_characterManager.EnemyCharacter.Health <= 0)
             {
                 Console.Write(Environment.NewLine + Environment.NewLine);
 
