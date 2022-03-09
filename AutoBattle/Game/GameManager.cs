@@ -1,21 +1,21 @@
 ﻿using AutoBattle.Characters;
 using AutoBattle.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AutoBattle.Game
 {
+    /// <summary>
+    /// GameManager is a singleton responsible to hold the main logic for the main game loop and provide access to the CharacterManager and GridManager.
+    /// </summary>
     public class GameManager
     {
         private static GameManager _instance;
 
         private readonly CharacterManager _characterManager;
         private readonly GridManager _gridManager;
-
         private int _currentTurn = 0;
-        //private int numberOfPossibleTiles = grid.grids.Count;
 
+        // Get the singleton instance
         public static GameManager Instance
         {
             get
@@ -40,7 +40,7 @@ namespace AutoBattle.Game
             _gridManager = new GridManager();
         }
 
-        public void StartGame(Grid grid)
+        public void StartGame()
         {
             //populates the character variables and targets
             var playerCharacter = _characterManager.PlayerCharacter;
@@ -48,7 +48,6 @@ namespace AutoBattle.Game
             _characterManager.SetTarget(playerCharacter, enemyCharacter);
             _characterManager.SetTarget(enemyCharacter, playerCharacter);
 
-            _gridManager.Grid = grid;
             _gridManager.AlocateCharacterLocation(playerCharacter);
             _gridManager.AlocateEnemyCharacter(enemyCharacter);
 
@@ -59,16 +58,15 @@ namespace AutoBattle.Game
         {
             if (_currentTurn == 0)
             {
-                //AllPlayers.Sort();
+                // Shuffles the Characters list to randomize the first character to play
                 _characterManager.AllPlayers.Shuffle();
             }
 
             var allPlayers = CharacterManager.AllPlayers;
-            var grid = GridManager.Grid;
 
             foreach (Character character in allPlayers)
             {
-                character.StartTurn(grid);
+                character.StartTurn();
             }
 
             _currentTurn++;
@@ -80,18 +78,14 @@ namespace AutoBattle.Game
             if (_characterManager.PlayerCharacter.Health == 0)
             {
                 Console.WriteLine("Game Over");
-                return;
             }
             else if (_characterManager.EnemyCharacter.Health == 0)
             {
                 Console.Write(Environment.NewLine + Environment.NewLine);
 
-                // endgame?
                 Console.WriteLine("You Win");
 
                 Console.Write(Environment.NewLine + Environment.NewLine);
-
-                return;
             }
             else
             {

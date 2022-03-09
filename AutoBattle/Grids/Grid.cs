@@ -8,14 +8,20 @@ namespace AutoBattle
 {
     public class Grid
     {
-        public List<GridBox> grids = new List<GridBox>();
-        public int xLenght;
-        public int yLength;
+        public List<GridBox> grids = new List<GridBox>(); // Change to private
+        public int _xLenght;
+        public int _yLength;
+
+        public int XLenght
+        { get { return _xLenght; } }
+
+        public int YLength
+        { get { return _yLength; } }
 
         public Grid(int Lines, int Columns)
         {
-            xLenght = Lines;
-            yLength = Columns;
+            _xLenght = Lines;
+            _yLength = Columns;
             Console.WriteLine("The battle field has been created\n");
             for (int i = 0; i < Lines; i++)
             {
@@ -28,6 +34,11 @@ namespace AutoBattle
             }
         }
 
+        public GridBox GetGridBoxByIndex(int index)
+        {
+            return grids.FirstOrDefault(cell => cell.Index == index);
+        }
+
         // prints the matrix that indicates the tiles of the battlefield
         public void drawBattlefield(int Lines, int Columns)
         {
@@ -36,7 +47,7 @@ namespace AutoBattle
                 for (int j = 0; j < Columns; j++)
                 {
                     GridBox currentgrid = new GridBox();
-                    if (currentgrid.ocupied)
+                    if (currentgrid.occupied)
                     {
                         //if()
                         Console.Write("[X]\t");

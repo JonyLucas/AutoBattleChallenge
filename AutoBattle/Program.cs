@@ -1,9 +1,5 @@
-﻿using AutoBattle.Enum;
-using AutoBattle.Game;
+﻿using AutoBattle.Game;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using static AutoBattle.Types;
 
 namespace AutoBattle
 {
@@ -15,10 +11,12 @@ namespace AutoBattle
         {
             gameManager = GameManager.Instance;
             Grid grid = GetGridSize();
+            gameManager.GridManager.Grid = grid;
+
             GetPlayerChoice();
             GetEnemyQuantity();
 
-            gameManager.StartGame(grid);
+            gameManager.StartGame();
         }
 
         private static Grid GetGridSize()
@@ -61,7 +59,7 @@ namespace AutoBattle
             Console.WriteLine("Choose the number of enemies in the game:");
             string input = Console.ReadLine();
 
-            if (Int32.TryParse(input, out int enemyQuantity) && enemyQuantity > 0 && enemyQuantity < gameManager.GridManager.numberOfPossibleTiles)
+            if (Int32.TryParse(input, out int enemyQuantity) && enemyQuantity > 0 && enemyQuantity < gameManager.GridManager.NumberOfPossibleTiles)
             {
                 for (int i = 0; i < enemyQuantity; i++)
                 {

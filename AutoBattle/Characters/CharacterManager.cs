@@ -1,11 +1,14 @@
 ﻿using AutoBattle.Enum;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using static AutoBattle.Types;
 
 namespace AutoBattle.Characters
 {
+    /// <summary>
+    /// Character Manager holds the character instances and also the initialization of those character.
+    /// </summary>
     public class CharacterManager
     {
         private Character _playerCharacter;
@@ -44,6 +47,11 @@ namespace AutoBattle.Characters
         public void SetTarget(Character character, Character target)
         {
             character.Target = target;
+        }
+
+        public Character GetCharacterInGridBox(GridBox gridBox)
+        {
+            return _allPlayers.FirstOrDefault(character => character.currentBox.Index == gridBox.Index);
         }
     }
 }
