@@ -76,33 +76,24 @@ namespace AutoBattle
                         MoveDirection(battlefield, nextIndex);
                         Console.WriteLine($"Player {PlayerIndex} walked right\n");
                     }
-                    return;
                 }
-
-                if (this.currentBox.yIndex > Target.currentBox.yIndex)
+                else if (direction == CharacterDirection.Up)
                 {
-                    //battlefield.drawBattlefield(5, 5);
-                    this.currentBox.occupied = false;
-                    battlefield.grids[currentBox.Index] = currentBox;
-                    this.currentBox = (battlefield.grids.Find(x => x.Index == currentBox.Index - battlefield.XLenght));
-                    this.currentBox.occupied = true;
-                    battlefield.grids[currentBox.Index] = currentBox;
-                    Console.WriteLine($"Player {PlayerIndex} walked up\n");
-                    _gameManager.GridManager.DrawBattlefield();
-                    return;
+                    nextIndex = currentBox.Index - battlefield.YLength;
+                    if ((battlefield.grids.Exists(x => x.Index == nextIndex)))
+                    {
+                        MoveDirection(battlefield, nextIndex);
+                        Console.WriteLine($"Player {PlayerIndex} walked up\n");
+                    }
                 }
-                else if (this.currentBox.yIndex < Target.currentBox.yIndex)
+                else if (direction == CharacterDirection.Down)
                 {
-                    this.currentBox.occupied = true;
-                    battlefield.grids[currentBox.Index] = this.currentBox;
-                    this.currentBox = (battlefield.grids.Find(x => x.Index == currentBox.Index + battlefield.XLenght));
-                    this.currentBox.occupied = false;
-                    battlefield.grids[currentBox.Index] = currentBox;
-                    Console.WriteLine($"Player {PlayerIndex} walked down\n");
-                    //battlefield.drawBattlefield(5, 5);
-                    _gameManager.GridManager.DrawBattlefield();
-
-                    return;
+                    nextIndex = currentBox.Index + battlefield.YLength;
+                    if ((battlefield.grids.Exists(x => x.Index == nextIndex)))
+                    {
+                        MoveDirection(battlefield, nextIndex);
+                        Console.WriteLine($"Player {PlayerIndex} walked down\n");
+                    }
                 }
             }
         }
@@ -113,6 +104,15 @@ namespace AutoBattle
             var xDistance = Math.Abs(currentBox.xIndex - Target.currentBox.xIndex);
             var yDistance = Math.Abs(currentBox.yIndex - Target.currentBox.yIndex);
 
+            if (xDistance == 0)
+            {
+                return this.currentBox.yIndex > Target.currentBox.yIndex ? CharacterDirection.Up : CharacterDirection.Down;
+            }
+            else if (yDistance == 0)
+            {
+                return this.currentBox.xIndex > Target.currentBox.xIndex ? CharacterDirection.Left : CharacterDirection.Right;
+            }
+
             if (xDistance < yDistance)
             {
                 // if the character x index is higher, it means that the character is positioned on the right of its target, so it must move left, and vice versa.
@@ -120,7 +120,8 @@ namespace AutoBattle
             }
             else
             {
-                return this.currentBox.yIndex > Target.currentBox.yIndex ? CharacterDirection.Down : CharacterDirection.Up;
+                // if the character y index is lower, it means that the character is positioned above its target, so it must move down, and vice versa.
+                return this.currentBox.yIndex > Target.currentBox.yIndex ? CharacterDirection.Up : CharacterDirection.Down;
             }
         }
 

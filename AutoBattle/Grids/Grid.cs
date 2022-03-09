@@ -38,28 +38,5 @@ namespace AutoBattle
         {
             return grids.FirstOrDefault(cell => cell.Index == index);
         }
-
-        // prints the matrix that indicates the tiles of the battlefield
-        public void drawBattlefield(int Lines, int Columns)
-        {
-            for (int i = 0; i < Lines; i++)
-            {
-                for (int j = 0; j < Columns; j++)
-                {
-                    GridBox currentgrid = new GridBox();
-                    if (currentgrid.occupied)
-                    {
-                        //if()
-                        Console.Write("[X]\t");
-                    }
-                    else
-                    {
-                        Console.Write($"[ ]\t");
-                    }
-                }
-                Console.Write(Environment.NewLine + Environment.NewLine);
-            }
-            Console.Write(Environment.NewLine + Environment.NewLine);
-        }
     }
 }
