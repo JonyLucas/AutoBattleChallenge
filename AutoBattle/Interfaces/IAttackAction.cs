@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AutoBattle.Interfaces
+﻿namespace AutoBattle.Interfaces
 {
     public interface IAttackAction
     {
+        public bool TakeDamage(float amount);
+
+        public void Attack();
     }
 }

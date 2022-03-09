@@ -4,8 +4,8 @@ namespace AutoBattle.Interfaces
 {
     public interface IMoveAction
     {
-        public void ExecuteAction(Character character, Grid battlefield);
+        public void ExecuteAction(Grid battlefield);
 
-        public bool CheckCloseTargets(Character character, Grid battlefield);
+        public bool CheckCloseTargets(Grid battlefield);
     }
 }

@@ -5,7 +5,7 @@ namespace AutoBattle.Characters
     /// <summary>
     /// CharacterFactory holds the base logic to create an instance of Character and initialize its fields.
     /// </summary>
-    public class CharacterFactory
+    public static class CharacterFactory
     {
         public static Character CreateCharacter(CharacterClass characterClass, int index, bool isPlayer)
         {

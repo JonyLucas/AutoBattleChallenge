@@ -1,4 +1,5 @@
-﻿using AutoBattle.Game;
+﻿using AutoBattle.Characters;
+using AutoBattle.Game;
 using System;
 using System.Linq;
 using static AutoBattle.Types;
