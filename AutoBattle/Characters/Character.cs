@@ -8,7 +8,8 @@ namespace AutoBattle
     public class Character
     {
         public GridBox currentBox;
-        private bool _isPlayer;
+        private readonly bool _isPlayer;
+        private bool _isDead;
         private readonly GameManager _gameManager;
 
         public string Name { get; set; }
@@ -21,9 +22,13 @@ namespace AutoBattle
         public bool IsPlayer
         { get { return _isPlayer; } }
 
+        public bool IsDead
+        { get { return _isDead; } }
+
         public Character(CharacterClass characterClass, bool isPlayer = false)
         {
             _isPlayer = isPlayer;
+            _isDead = false;
             _gameManager = GameManager.Instance;
         }
 
@@ -39,15 +44,20 @@ namespace AutoBattle
 
         public void Die()
         {
-            //TODO >> maybe kill him?
-        }
-
-        public void WalkTO(bool CanWalk)
-        {
+            _isDead = true;
+            var battlefield = _gameManager.GridManager.Grid;
+            currentBox.occupied = false;
+            battlefield.grids[currentBox.Index] = currentBox;
+            _gameManager.GridManager.DrawBattlefield();
         }
 
         public void StartTurn()
         {
+            if (_isDead)
+            {
+                return;
+            }
+
             var battlefield = _gameManager.GridManager.Grid;
             if (CheckCloseTargets(battlefield))
             {
@@ -142,10 +152,10 @@ namespace AutoBattle
         {
             bool left = (battlefield.grids.Find(x => x.Index == currentBox.Index - 1).occupied);
             bool right = (battlefield.grids.Find(x => x.Index == currentBox.Index + 1).occupied);
-            bool up = (battlefield.grids.Find(x => x.Index == currentBox.Index + battlefield.XLenght).occupied);
-            bool down = (battlefield.grids.Find(x => x.Index == currentBox.Index - battlefield.XLenght).occupied);
+            bool up = (battlefield.grids.Find(x => x.Index == currentBox.Index + battlefield.YLength).occupied);
+            bool down = (battlefield.grids.Find(x => x.Index == currentBox.Index - battlefield.YLength).occupied);
 
-            if (left && right && up && down)
+            if (left || right || up || down)
             {
                 return true;
             }

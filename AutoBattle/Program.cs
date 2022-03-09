@@ -10,8 +10,7 @@ namespace AutoBattle
         private static void Main(string[] args)
         {
             gameManager = GameManager.Instance;
-            Grid grid = GetGridSize();
-            gameManager.GridManager.Grid = grid;
+            gameManager.GridManager.Grid = GetGridSize();
 
             GetPlayerChoice();
             GetEnemyQuantity();
