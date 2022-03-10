@@ -96,7 +96,7 @@ namespace AutoBattle.Game
                 Console.WriteLine("Click on any key to start the next turn...\n");
                 Console.Write(Environment.NewLine + Environment.NewLine);
 
-                ConsoleKeyInfo key = Console.ReadKey();
+                Console.ReadKey();
             }
         }
     }

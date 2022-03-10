@@ -3,7 +3,7 @@ using System;
 
 namespace AutoBattle
 {
-    internal class Program
+    internal static class Program
     {
         private static GameManager gameManager;
 
