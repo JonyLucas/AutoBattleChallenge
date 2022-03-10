@@ -2,7 +2,7 @@
 {
     public interface IAttackAction
     {
-        public bool TakeDamage(float amount);
+        public void TakeDamage(float amount);
 
         public void Attack();
     }

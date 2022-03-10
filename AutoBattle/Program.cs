@@ -12,8 +12,9 @@ namespace AutoBattle
             gameManager = GameManager.Instance;
             gameManager.GridManager.Grid = CreateGrid();
 
-            GetPlayerChoice();
-            GetEnemyQuantity();
+            CreaterPlayer();
+            CreateEnemy();
+            //CreateMultipleEnemies();
 
             gameManager.StartGame();
         }
@@ -35,26 +36,43 @@ namespace AutoBattle
             return new Grid(lines, columns);
         }
 
-        private static void GetPlayerChoice()
+        /// <summary>
+        /// Creates the player character and define its character class.
+        /// </summary>
+        private static void CreaterPlayer()
         {
-            //asks for the player to choose between for possible classes via console.
-            Console.WriteLine("Choose Between One of this Classes:\n");
-            Console.WriteLine("[1] Paladin, [2] Warrior, [3] Cleric, [4] Archer");
-            //store the player choice in a variable
-            string choice = Console.ReadLine();
+            bool isValidChoice = false;
 
-            if (int.TryParse(choice, out int indexCharacterClass) && indexCharacterClass <= 4 && indexCharacterClass >= 1)
+            while (!isValidChoice) // Utilize a loop structure instead of recursive calls for better performance
             {
-                gameManager.CharacterManager.CreatePlayerCharacter(indexCharacterClass);
-            }
-            else
-            {
-                GetPlayerChoice();
+                //asks for the player to choose between for possible classes via console.
+                Console.WriteLine("Choose Between One of this Classes:\n");
+                Console.WriteLine("[1] Paladin, [2] Warrior, [3] Cleric, [4] Archer");
+                //store the player choice in a variable
+                string choice = Console.ReadLine();
+
+                if (int.TryParse(choice, out int indexCharacterClass) && indexCharacterClass <= 4 && indexCharacterClass >= 1)
+                {
+                    gameManager.CharacterManager.CreatePlayerCharacter(indexCharacterClass);
+                    isValidChoice = true;
+                }
             }
         }
 
-        private static void GetEnemyQuantity()
+        private static void CreateEnemy()
         {
+            gameManager.CharacterManager.CreateEnemyCharacter();
+        }
+
+        /// <summary>
+        /// This method create multiple enemies (without a especific team). (Not utilized yet)
+        /// PS.: We could create another method to create the teams and its specific name, symbol (to appears different from the others) and number of characters.
+        /// </summary>
+        private static void CreateMultipleEnemies()
+        {
+            //This is the logic to create multiple enemy characters.
+            //We could create another method to create the teams and its specific name, symbol (to appears different from the others) and number of characters.
+
             Console.WriteLine("Choose the number of enemies in the game:");
             string input = Console.ReadLine();
 

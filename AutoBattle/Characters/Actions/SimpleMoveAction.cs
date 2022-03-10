@@ -2,12 +2,17 @@
 using AutoBattle.Game;
 using AutoBattle.Interfaces;
 using System;
+using static AutoBattle.Types;
 
 namespace AutoBattle.Characters.Actions
 {
+    /// <summary>
+    /// This class implements a basic logic for the character's movement, where it only can move to one direction and one cell at each turn.
+    /// </summary>
     public class SimpleMoveAction : IMoveAction
     {
         private readonly Character _character;
+        private GridBox _previouPosition;
 
         public SimpleMoveAction(Character character)
         {
@@ -25,8 +30,8 @@ namespace AutoBattle.Characters.Actions
                 nextIndex = _character.currentBox.Index - 1;
                 if ((battlefield.grids.Exists(x => x.Index == nextIndex)))
                 {
-                    MoveDirection(battlefield, nextIndex);
                     Console.WriteLine($"Player {_character.PlayerIndex} walked left\n");
+                    MoveDirection(battlefield, nextIndex);
                 }
             }
             else if (direction == CharacterDirection.Right)
@@ -34,8 +39,8 @@ namespace AutoBattle.Characters.Actions
                 nextIndex = _character.currentBox.Index + 1;
                 if ((battlefield.grids.Exists(x => x.Index == nextIndex)))
                 {
-                    MoveDirection(battlefield, nextIndex);
                     Console.WriteLine($"Player {_character.PlayerIndex} walked right\n");
+                    MoveDirection(battlefield, nextIndex);
                 }
             }
             else if (direction == CharacterDirection.Up)
@@ -43,8 +48,8 @@ namespace AutoBattle.Characters.Actions
                 nextIndex = _character.currentBox.Index - battlefield.YLength;
                 if ((battlefield.grids.Exists(x => x.Index == nextIndex)))
                 {
-                    MoveDirection(battlefield, nextIndex);
                     Console.WriteLine($"Player {_character.PlayerIndex} walked up\n");
+                    MoveDirection(battlefield, nextIndex);
                 }
             }
             else if (direction == CharacterDirection.Down)
@@ -52,8 +57,8 @@ namespace AutoBattle.Characters.Actions
                 nextIndex = _character.currentBox.Index + battlefield.YLength;
                 if ((battlefield.grids.Exists(x => x.Index == nextIndex)))
                 {
-                    MoveDirection(battlefield, nextIndex);
                     Console.WriteLine($"Player {_character.PlayerIndex} walked down\n");
+                    MoveDirection(battlefield, nextIndex);
                 }
             }
         }
@@ -97,6 +102,7 @@ namespace AutoBattle.Characters.Actions
 
             currentBox.occupied = false;
             battlefield.grids[currentBox.Index] = currentBox;
+            _previouPosition = currentBox;
 
             nextBox.occupied = true;
             _character.currentBox = nextBox;
@@ -118,6 +124,14 @@ namespace AutoBattle.Characters.Actions
                 return true;
             }
             return false;
+        }
+
+        public void RewindPosition(Grid battlefield)
+        {
+            Console.WriteLine($"Player {_character.PlayerIndex} has been pushed away\n");
+            var currentBox = _character.currentBox;
+            var nextIndex = currentBox.Index + (_previouPosition.Index - currentBox.Index);
+            MoveDirection(battlefield, nextIndex);
         }
     }
 }

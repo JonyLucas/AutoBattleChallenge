@@ -15,15 +15,16 @@ namespace AutoBattle.Characters.Actions
             _gameManager = GameManager.Instance;
         }
 
-        public bool TakeDamage(float amount)
+        public void TakeDamage(float amount)
         {
             if ((_character.Health -= amount) <= 0)
             {
                 Die();
-                return true;
+                return;
             }
+
             Console.WriteLine($"Player {_character.PlayerIndex} helth: {_character.Health}\n");
-            return false;
+            PushAwayDamage();
         }
 
         private void Die()
@@ -43,8 +44,24 @@ namespace AutoBattle.Characters.Actions
         {
             var target = _character.Target;
             var rand = new Random();
-            target.AttackAction.TakeDamage(rand.Next(0, (int)_character.BaseDamage));
-            Console.WriteLine($"Player {_character.PlayerIndex} is attacking the player {target.PlayerIndex} and did {_character.BaseDamage} damage\n");
+            var damage = rand.Next(0, (int)_character.BaseDamage);
+
+            Console.WriteLine($"Player {_character.PlayerIndex} is attacking the player {target.PlayerIndex} and did {damage} damage\n");
+            target.AttackAction.TakeDamage(damage);
+        }
+
+        /// <summary>
+        /// The attack has a chance to push a character away (random chance)
+        /// Implementation of the special feature related to the candidature.
+        /// </summary>
+        private void PushAwayDamage()
+        {
+            Random rand = new Random();
+            var condition = rand.Next(0, 2);
+            if (condition == 1)
+            {
+                _character.MoveAction.RewindPosition(_gameManager.GridManager.Grid);
+            }
         }
     }
 }

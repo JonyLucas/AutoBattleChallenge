@@ -6,6 +6,9 @@ using static AutoBattle.Types;
 
 namespace AutoBattle
 {
+    /// <summary>
+    /// GridManager holds the reference of the grid and logic related to the grid manipulation.
+    /// </summary>
     public class GridManager
     {
         public Grid Grid { get; set; }
@@ -21,14 +24,17 @@ namespace AutoBattle
             {
                 Random rand = new Random();
                 int random = rand.Next(0, NumberOfPossibleTiles);
-                GridBox RandomLocation = (Grid.grids.ElementAt(random));
+                GridBox randomLocation = (Grid.grids.ElementAt(random));
 
-                if (!RandomLocation.occupied)
+                if (!randomLocation.occupied)
                 {
                     isPositionated = true;
-                    RandomLocation.occupied = true;
-                    Grid.grids[random] = RandomLocation;
-                    character.currentBox = Grid.grids[random];
+                    randomLocation.occupied = true;
+                    Grid.grids[random] = randomLocation;
+                    character.currentBox = randomLocation;
+
+                    Console.WriteLine($"Player {character.PlayerIndex} is positioned at ({randomLocation.xIndex}, {randomLocation.yIndex}) \n");
+                    DrawBattlefield();
                 }
             }
         }
@@ -50,6 +56,7 @@ namespace AutoBattle
 
                     if (currentgrid.occupied)
                     {
+                        // O represents the player's character, and the X the enemy. It was done so we could differentiate  them from each other.
                         Console.Write($"[{(character.IsPlayer ? 'O' : 'X')}]\t");
                     }
                     else

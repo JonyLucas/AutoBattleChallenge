@@ -18,10 +18,10 @@ namespace AutoBattle.Characters
         public List<Character> AllPlayers
         { get { return _allPlayers; } }
 
-        public Character PlayerCharacter // Temp
+        public Character PlayerCharacter // It's temporary, we could only use the AllPlayers property to manipulate the characters
         { get { return _playerCharacter; } }
 
-        public Character EnemyCharacter // Temp
+        public Character EnemyCharacter // It's temporary, we could only use the AllPlayers property to manipulate the characters
         { get { return _enemyCharacter; } }
 
         public void CreatePlayerCharacter(int classOption)

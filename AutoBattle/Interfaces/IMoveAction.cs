@@ -7,5 +7,7 @@ namespace AutoBattle.Interfaces
         public void ExecuteAction(Grid battlefield);
 
         public bool CheckCloseTargets(Grid battlefield);
+
+        public void RewindPosition(Grid battlefield);
     }
 }

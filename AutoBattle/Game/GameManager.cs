@@ -78,14 +78,14 @@ namespace AutoBattle.Game
         {
             if (_characterManager.PlayerCharacter.Health <= 0)
             {
-                Console.WriteLine("Game Over");
+                Console.WriteLine($"Player {_characterManager.EnemyCharacter.PlayerIndex} is the winner!");
                 _isGameOver = true;
             }
             else if (_characterManager.EnemyCharacter.Health <= 0)
             {
                 Console.Write(Environment.NewLine + Environment.NewLine);
 
-                Console.WriteLine("You Win");
+                Console.WriteLine($"Player {_characterManager.PlayerCharacter.PlayerIndex} is the winner!");
                 _isGameOver = true;
 
                 Console.Write(Environment.NewLine + Environment.NewLine);
